@@ -52,7 +52,7 @@ const LoginForm: React.FC = () => {
   }, [error]);
   
   return (
-    <div className="w-full max-w-md mx-auto bg-dark-100 rounded-lg shadow-sm p-8 animate-fade-in border border-dark-200">
+    <div className="w-full max-w-md mx-auto bg-dark-100 rounded-lg shadow-lg border border-dark-200 p-8 animate-fade-in">
       <form onSubmit={handleSubmit} className="space-y-6">
         <Input
           id="email"
@@ -84,7 +84,7 @@ const LoginForm: React.FC = () => {
               id="remember-me"
               name="remember-me"
               type="checkbox"
-              className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-dark-300 rounded bg-dark-200"
+              className="h-4 w-4 text-primary-500 focus:ring-primary-500 border-dark-300 rounded bg-dark-200"
             />
             <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-300">
               Remember me
