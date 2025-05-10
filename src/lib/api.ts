@@ -7,6 +7,9 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  // Add timeout and withCredentials for better error handling
+  timeout: 10000,
+  withCredentials: true,
 });
 
 // Add the token to every request if it exists
@@ -22,18 +25,30 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
+    if (axios.isAxiosError(error)) {
+      // Network error
+      if (!error.response) {
+        throw new Error('Network error - please check your connection');
+      }
+      // Server returned an error
+      if (error.response.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/login';
+      }
+      const message = error.response?.data?.message || error.message;
+      throw new Error(message);
     }
-    return Promise.reject(error);
+    throw new Error('An unexpected error occurred');
   }
 );
 
 // Error handler helper
 const handleError = (error: unknown) => {
   if (axios.isAxiosError(error)) {
+    if (!error.response) {
+      throw new Error('Network error - please check your connection');
+    }
     const message = error.response?.data?.message || error.message;
     throw new Error(message);
   }
