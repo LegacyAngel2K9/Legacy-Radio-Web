@@ -7,12 +7,17 @@ import { Server, Plus, Edit, Trash2, Search } from 'lucide-react';
 import serverStore from '../../store/serverStore';
 import toast from 'react-hot-toast';
 import Input from '../../components/ui/Input';
+import { setPageTitle } from '../../lib/utils';
 
 const AdminServersPage: React.FC = () => {
   const { servers, loading, error, fetchServers, createServer, updateServer } = serverStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editingServer, setEditingServer] = useState<any>(null);
+
+  useEffect(() => {
+    setPageTitle('Admin Servers');
+  }, []);
 
   useEffect(() => {
     fetchServers();
