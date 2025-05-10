@@ -11,8 +11,10 @@ const Footer: React.FC = () => {
           {/* Logo and Tagline */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center">
-              <Logo className="h-8 w-8 text-accent-500" />
-              <span className="ml-2 text-xl font-bold">RADIO</span>
+              <Link to="/" className="flex items-center">
+                <Logo className="h-8 w-8" />
+                <Logo type="text" className="h-6 ml-2" />
+              </Link>
             </div>
             <p className="mt-2 text-sm text-gray-400 dark:text-gray-500">
               Professional voice communication for logistics and transport since 2025.
