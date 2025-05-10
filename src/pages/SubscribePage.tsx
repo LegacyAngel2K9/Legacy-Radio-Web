@@ -13,8 +13,8 @@ import serverStore from '../store/serverStore';
 import subscriptionStore from '../store/subscriptionStore';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { setPageTitle } from '../lib/utils';
 
-// Mock Stripe promise - in a real app, use your actual publishable key
 const stripePromise = loadStripe('pk_test_mock');
 
 const SubscribePage: React.FC = () => {
@@ -36,6 +36,10 @@ const SubscribePage: React.FC = () => {
   const [step, setStep] = useState(1);
   const [isDiscountValid, setIsDiscountValid] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setPageTitle('Subscribe');
+  }, []);
 
   useEffect(() => {
     fetchServers();
