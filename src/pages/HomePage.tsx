@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import { Radio, Shield, Clock, Server, User, CreditCard, Tag } from 'lucide-react';
 import Layout from '../components/layout/Layout';
+import { setPageTitle } from '../lib/utils';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setPageTitle('Home');
+  }, []);
 
   return (
     <Layout>
