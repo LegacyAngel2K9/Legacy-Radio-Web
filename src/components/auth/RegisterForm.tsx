@@ -14,7 +14,7 @@ const RegisterForm: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [termsAccepted, setTermsAccepted] = useState(false);
   
-  const { register, loading } = authStore();
+  const { register, loading, error } = authStore();
   const navigate = useNavigate();
   
   const validate = () => {
@@ -67,6 +67,12 @@ const RegisterForm: React.FC = () => {
       }
     }
   };
+  
+  React.useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
   
   return (
     <div className="w-full max-w-md mx-auto bg-dark-100 rounded-lg shadow-lg border border-dark-200 p-8 animate-fade-in">

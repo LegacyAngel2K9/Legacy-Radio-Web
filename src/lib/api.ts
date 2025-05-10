@@ -32,9 +32,10 @@ api.interceptors.response.use(
 );
 
 // Error handler helper
-const handleError = (error: unknown): never => {
-  if (axios.isAxiosError(error) && error.response) {
-    throw new Error(error.response.data.message || 'An error occurred');
+const handleError = (error: unknown) => {
+  if (axios.isAxiosError(error)) {
+    const message = error.response?.data?.message || error.message;
+    throw new Error(message);
   }
   throw new Error('An unexpected error occurred');
 };

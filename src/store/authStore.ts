@@ -46,6 +46,7 @@ const authStore = create<AuthState>((set, get) => ({
         isAuthenticated: true,
         isAdmin,
         loading: false,
+        error: null,
       });
     } catch (error) {
       set({
@@ -68,6 +69,7 @@ const authStore = create<AuthState>((set, get) => ({
         isAuthenticated: true,
         isAdmin: user.role === 'admin',
         loading: false,
+        error: null,
       });
     } catch (error) {
       set({
@@ -86,6 +88,7 @@ const authStore = create<AuthState>((set, get) => ({
       token: null,
       isAuthenticated: false,
       isAdmin: false,
+      error: null,
     });
   },
 
@@ -115,11 +118,17 @@ const authStore = create<AuthState>((set, get) => ({
         user: userData,
         isAuthenticated: true,
         isAdmin: userData.role === 'admin',
+        error: null,
       });
       return true;
     } catch (error) {
       localStorage.removeItem('token');
-      set({ isAuthenticated: false, user: null, token: null });
+      set({ 
+        isAuthenticated: false, 
+        user: null, 
+        token: null,
+        error: error instanceof Error ? error.message : 'Authentication failed',
+      });
       return false;
     }
   },
