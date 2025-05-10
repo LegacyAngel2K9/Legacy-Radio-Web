@@ -33,16 +33,16 @@ const authStore = create<AuthState>((set, get) => ({
   login: async (email: string, password: string) => {
     set({ loading: true, error: null });
     try {
-      const data = await login(email, password);
-      localStorage.setItem('token', data.token);
+      const { token, user } = await login(email, password);
+      localStorage.setItem('token', token);
       
       // Decode JWT to check if user is admin
-      const decoded = jwtDecode<JwtPayload>(data.token);
+      const decoded = jwtDecode<JwtPayload>(token);
       const isAdmin = decoded.role === 'admin';
       
       set({
-        user: data.user,
-        token: data.token,
+        user,
+        token,
         isAuthenticated: true,
         isAdmin,
         loading: false,
@@ -50,33 +50,31 @@ const authStore = create<AuthState>((set, get) => ({
     } catch (error) {
       set({
         loading: false,
-        error: typeof error === 'object' && error !== null && 'message' in error
-          ? String(error.message)
-          : 'Failed to login',
+        error: error instanceof Error ? error.message : 'Failed to login',
       });
+      throw error;
     }
   },
 
   register: async (email: string, username: string, password: string) => {
     set({ loading: true, error: null });
     try {
-      const data = await register(email, username, password);
-      localStorage.setItem('token', data.token);
+      const { token, user } = await register(email, username, password);
+      localStorage.setItem('token', token);
       
       set({
-        user: data.user,
-        token: data.token,
+        user,
+        token,
         isAuthenticated: true,
-        isAdmin: data.user.role === 'admin',
+        isAdmin: user.role === 'admin',
         loading: false,
       });
     } catch (error) {
       set({
         loading: false,
-        error: typeof error === 'object' && error !== null && 'message' in error
-          ? String(error.message)
-          : 'Failed to register',
+        error: error instanceof Error ? error.message : 'Failed to register',
       });
+      throw error;
     }
   },
 

@@ -12,8 +12,9 @@ const RegisterForm: React.FC = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [termsAccepted, setTermsAccepted] = useState(false);
   
-  const { register, loading, error } = authStore();
+  const { register, loading } = authStore();
   const navigate = useNavigate();
   
   const validate = () => {
@@ -40,6 +41,10 @@ const RegisterForm: React.FC = () => {
     if (password !== confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
+
+    if (!termsAccepted) {
+      newErrors.terms = 'You must accept the Terms of Service and Privacy Policy';
+    }
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -55,15 +60,13 @@ const RegisterForm: React.FC = () => {
       toast.success('Registration successful!');
       navigate('/dashboard');
     } catch (error) {
-      // Error is handled by the store
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error('An unexpected error occurred');
+      }
     }
   };
-  
-  React.useEffect(() => {
-    if (error) {
-      toast.error(error);
-    }
-  }, [error]);
   
   return (
     <div className="w-full max-w-md mx-auto bg-dark-100 rounded-lg shadow-lg border border-dark-200 p-8 animate-fade-in">
@@ -122,7 +125,8 @@ const RegisterForm: React.FC = () => {
             name="terms"
             type="checkbox"
             className="h-4 w-4 text-primary-500 focus:ring-primary-500 border-dark-300 rounded bg-dark-200"
-            required
+            checked={termsAccepted}
+            onChange={(e) => setTermsAccepted(e.target.checked)}
           />
           <label htmlFor="terms" className="ml-2 block text-sm text-gray-300">
             I agree to the{' '}
@@ -135,6 +139,9 @@ const RegisterForm: React.FC = () => {
             </a>
           </label>
         </div>
+        {errors.terms && (
+          <p className="text-sm text-error-400">{errors.terms}</p>
+        )}
         
         <Button
           type="submit"
