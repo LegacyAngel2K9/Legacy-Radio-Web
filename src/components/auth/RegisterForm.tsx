@@ -19,7 +19,7 @@ const RegisterForm: React.FC = () => {
   
   const validate = () => {
     const newErrors: Record<string, string> = {};
-    
+    .
     if (!email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
