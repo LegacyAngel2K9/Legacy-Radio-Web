@@ -7,6 +7,7 @@ import { Server, Tag, User, Radio } from 'lucide-react';
 import serverStore from '../../store/serverStore';
 import discountCodeStore from '../../store/discountCodeStore';
 import toast from 'react-hot-toast';
+import { setPageTitle } from '../../lib/utils';
 
 const AdminOverviewPage: React.FC = () => {
   const { servers, loading: serversLoading, fetchServers } = serverStore();
@@ -16,6 +17,10 @@ const AdminOverviewPage: React.FC = () => {
     fetchDiscountCodes 
   } = discountCodeStore();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setPageTitle('Admin Overview');
+  }, []);
 
   useEffect(() => {
     fetchServers();
