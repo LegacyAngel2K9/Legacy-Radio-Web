@@ -33,17 +33,11 @@ api.interceptors.response.use(
 );
 
 // Error handler helper
-const handleError = (error: unknown): ApiError => {
+const handleError = (error: unknown): never => {
   if (axios.isAxiosError(error) && error.response) {
-    return {
-      message: error.response.data.message || 'An error occurred',
-      status: error.response.status,
-    };
+    throw new Error(error.response.data.message || 'An error occurred');
   }
-  return {
-    message: 'An unexpected error occurred',
-    status: 500,
-  };
+  throw new Error('An unexpected error occurred');
 };
 
 // Auth API calls
