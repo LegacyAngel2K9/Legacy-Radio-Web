@@ -8,8 +8,13 @@ import { Radio, Server, Plus, Calendar, User } from 'lucide-react';
 import subscriptionStore from '../store/subscriptionStore';
 import authStore from '../store/authStore';
 import toast from 'react-hot-toast';
+import { setPageTitle } from '../lib/utils';
 
 const DashboardPage: React.FC = () => {
+  useEffect(() => {
+    setPageTitle('Dashboard');
+  }, []);
+
   const { subscriptions, loading, error, fetchSubscriptions } = subscriptionStore();
   const { user } = authStore();
   const navigate = useNavigate();

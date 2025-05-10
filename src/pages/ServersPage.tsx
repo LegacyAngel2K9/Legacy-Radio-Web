@@ -7,8 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import { Radio, Server, Calendar, Users } from 'lucide-react';
 import subscriptionStore from '../store/subscriptionStore';
 import toast from 'react-hot-toast';
+import { setPageTitle } from '../lib/utils';
 
 const ServersPage: React.FC = () => {
+  useEffect(() => {
+    setPageTitle('Servers');
+  }, []);
+
   const { subscriptions, loading, error, fetchSubscriptions } = subscriptionStore();
   const navigate = useNavigate();
 
