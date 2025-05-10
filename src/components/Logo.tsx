@@ -7,8 +7,8 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ className = "h-6 w-6" }) => {
   return (
     <img 
-      src="/icon.png"
-      alt="Radio Logo"
+      src="/legacyradio.png"
+      alt="RADIO"
       className={`${className} object-contain`}
     />
   );
