@@ -9,7 +9,7 @@ const Logo: React.FC<LogoProps> = ({ className = "h-6 w-6" }) => {
     <img 
       src="/icon.png"
       alt="Radio Logo"
-      className={className}
+      className={`${className} object-contain`}
     />
   );
 };
