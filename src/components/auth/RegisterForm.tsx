@@ -66,14 +66,7 @@ const RegisterForm: React.FC = () => {
   }, [error]);
   
   return (
-    <div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-sm p-8 animate-fade-in">
-      <div className="text-center mb-6">
-        <h2 className="text-3xl font-bold text-gray-900">Create an account</h2>
-        <p className="mt-2 text-sm text-gray-600">
-          Join Legacy Radio communication platform
-        </p>
-      </div>
-      
+    <div className="w-full max-w-md mx-auto bg-dark-100 rounded-lg shadow-sm p-8 animate-fade-in border border-dark-200">
       <form onSubmit={handleSubmit} className="space-y-6">
         <Input
           id="email"
@@ -128,16 +121,16 @@ const RegisterForm: React.FC = () => {
             id="terms"
             name="terms"
             type="checkbox"
-            className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+            className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-dark-300 rounded bg-dark-200"
             required
           />
-          <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
+          <label htmlFor="terms" className="ml-2 block text-sm text-gray-300">
             I agree to the{' '}
-            <a href="#" className="font-medium text-primary-600 hover:text-primary-500">
+            <a href="#" className="font-medium text-primary-400 hover:text-primary-300">
               Terms of Service
             </a>{' '}
             and{' '}
-            <a href="#" className="font-medium text-primary-600 hover:text-primary-500">
+            <a href="#" className="font-medium text-primary-400 hover:text-primary-300">
               Privacy Policy
             </a>
           </label>
@@ -155,9 +148,9 @@ const RegisterForm: React.FC = () => {
       </form>
       
       <div className="mt-6 text-center">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-400">
           Already have an account?{' '}
-          <Link to="/login" className="font-medium text-primary-600 hover:text-primary-500">
+          <Link to="/login" className="font-medium text-primary-400 hover:text-primary-300">
             Sign in
           </Link>
         </p>
