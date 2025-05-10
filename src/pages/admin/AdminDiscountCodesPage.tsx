@@ -9,6 +9,7 @@ import serverStore from '../../store/serverStore';
 import toast from 'react-hot-toast';
 import Input from '../../components/ui/Input';
 import Badge from '../../components/ui/Badge';
+import { setPageTitle } from '../../lib/utils';
 
 const AdminDiscountCodesPage: React.FC = () => {
   const { 
@@ -25,6 +26,10 @@ const AdminDiscountCodesPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [viewingCodeId, setViewingCodeId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setPageTitle('Admin Discount Codes');
+  }, []);
 
   useEffect(() => {
     fetchDiscountCodes();
