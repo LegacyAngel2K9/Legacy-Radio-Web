@@ -25,10 +25,8 @@ const Navbar: React.FC = () => {
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link to="/" className="flex items-center">
-                <Logo className="h-8 w-8 text-accent-500" />
-                <span className="ml-2 font-semibold text-xl text-gray-900 dark:text-gray-100">
-                  RADIO
-                </span>
+                <Logo className="h-8 w-8" />
+                <Logo type="text" className="h-6 ml-2" />
               </Link>
             </div>
             
